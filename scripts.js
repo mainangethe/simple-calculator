@@ -12,7 +12,7 @@ calculateMultiplication = (a,b) => {
 }
 
 calculateDivision = (a,b) => {
-  return Math.round (a / b);
+  return (a / b).toFixed(2);
 }
 
 //display values
