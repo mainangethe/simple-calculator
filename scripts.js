@@ -40,9 +40,9 @@ function keysClicked(event) {
   }
 
   if (eventTarget.nodeName.toLowerCase() === 'div') {
-    let deleteOption = eventTarget.getAttribute('data-action');
+    let divOption = eventTarget.getAttribute('data-action');
 
-    if (deleteOption == 'delete') {
+    if (divOption == 'delete') {
       let currentContents = displayDiv.textContent;
       displayDiv.textContent = '';
       toCalculate.pop();
@@ -50,7 +50,7 @@ function keysClicked(event) {
       sendToDisplay( currentContents.slice(0, currentContents.length-1) );
 
     }
-    else if (deleteOption == 'clear') {
+    else if (divOption == 'clear') {
       toCalculate = [];
       sendToDisplay(displayDiv.textContent = '')
       for (option of screenOptions) option.style.display = 'none';
@@ -71,6 +71,30 @@ equalsButton.addEventListener('click', event => {
 
   const displayResult = document.querySelector('.result');
   displayResult.textContent = operate(toCalculate);
+  for (option of screenOptions) option.style.display = 'none';
+
+  const resetButton = document.createElement('div');
+  resetButton.textContent = 'reset';
+  resetButton.className = 'options';
+  resetButton.className += ' success';
+  resetButton.dataset.action = 'reset';
+  resetButton.style.display = 'inline-block';
+
+  const screen = document.querySelector('.screen');
+  screen.prepend(resetButton);
+
+  resetButton.addEventListener('click', () => {
+    for (button of allButtons) button.disabled = false;
+    toCalculate = [];
+    sendToDisplay(displayDiv.textContent = '');
+    sendToDisplay(displayResult.textContent = '');
+    window.addEventListener('click', keysClicked);
+    for (option of screenOptions) option.style.display = 'none';
+    resetButton.style.display = 'none';
+
+
+});
+
 });
 
 

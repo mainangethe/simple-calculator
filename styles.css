@@ -49,27 +49,33 @@ header p { font-family: 'Open Sans', sans-serif; }
   padding: 2px;
 }
 
-.warning {
-  color: hsla(19, 72%, 64%, .8);
-  border-color: hsla(19, 72%, 64%, .8);
-}
+.warning { color: hsla(19, 72%, 64%, .8); }
 
 .warning:hover {
   background-color: hsla(19, 72%, 64%, 1);
   color: hsla(0, 0%, 100%, 1);
-  border-color: hsla(19, 72%, 64%, 1);
+
 }
 
 .danger {
   background-color: hsla(355, 100%, 39%, .8);
   color: hsla(0,0%,100%, .8);
-  border-color: hsla(355, 100%, 39%, .8);
+
 }
 
 .danger:hover {
   background-color: hsla(0, 0%, 100%, 1);
   color: hsla(355, 100%, 39%, 1);
-  border-color: hsla(0, 0, 100%, 1);
+}
+
+.success {
+  background-color: hsla(125, 100%, 29%, .85);
+  color: hsla(0, 0%, 100%, .85);
+}
+
+.success:hover {
+  background-color: hsla(0, 0%, 100%, 1);
+  color: hsla(104, 100%, 29%, 1);
 }
 
 /* key style rules */
