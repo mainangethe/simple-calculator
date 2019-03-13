@@ -20,6 +20,12 @@ sendToDisplay = value => { displayDiv.textContent += value; }
 
 //store values entered
 let toCalculate = [];
+const displayDiv = document.querySelector('.values');
+let screenOptions = document.querySelectorAll('.options');
+
+if (displayDiv.textContent.length == 0) {
+  for (option of screenOptions) option.style.display = 'none';
+}
 
 //Event Listeners
 window.addEventListener('click', keysClicked);
@@ -27,10 +33,29 @@ window.addEventListener('click', keysClicked);
 function keysClicked(event) {
   let eventTarget = event.target;
   if (eventTarget.nodeName.toLowerCase() === 'button'){
-
      let valueClicked = eventTarget.getAttribute('data-value');
      sendToDisplay(valueClicked);
      toCalculate.push(valueClicked);
+     for (option of screenOptions) option.style.display = 'inline-block';
+  }
+
+  if (eventTarget.nodeName.toLowerCase() === 'div') {
+    let deleteOption = eventTarget.getAttribute('data-action');
+
+    if (deleteOption == 'delete') {
+      let currentContents = displayDiv.textContent;
+      displayDiv.textContent = '';
+      toCalculate.pop();
+
+      sendToDisplay( currentContents.slice(0, currentContents.length-1) );
+
+    }
+    else if (deleteOption == 'clear') {
+      toCalculate = [];
+      sendToDisplay(displayDiv.textContent = '')
+      for (option of screenOptions) option.style.display = 'none';
+    }
+
   }
 }
 
@@ -48,7 +73,7 @@ equalsButton.addEventListener('click', event => {
   displayResult.textContent = operate(toCalculate);
 });
 
-const displayDiv = document.querySelector('.values');
+
 
 
 function operate (array) {
@@ -59,11 +84,6 @@ function operate (array) {
     let operator = arguments.match(/[+-\/x]/).toString();
 
     return result = determineOperation(operator, leftOperand, rightOperand);
-
-    // console.log('what we need to calculate: ', arguments);
-    console.log('left contents: ', leftOperand);
-    console.log('right contents: ', rightOperand);
-    console.log('and we want to do: ', operator);
   }
 }
 

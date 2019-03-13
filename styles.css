@@ -23,7 +23,7 @@ header p {
 }
 
 .screen {
-  width: 300px;
+  width: 350px;
   height: 250px;
   position: absolute; right: 3%; bottom: 0;
   text-align: right; padding: 30px;
@@ -41,6 +41,38 @@ header p {
   font-size: 6rem;
   font-weight: bold;
   color: hsl(351, 33.6%, 57.5%);
+}
+
+.options {
+
+  margin: 10px 5px;
+  cursor: pointer;
+  border: .5px solid;
+  border-radius: 1.3px;
+  padding: 2px;
+}
+
+.warning {
+  color: hsl(19, 72%, 64%);
+  border-color: hsl(19, 72%, 64%);
+}
+
+.warning:hover {
+  background-color: hsl(19, 72%, 64%);
+  color: hsl(0, 0%, 100%);
+  border-color: hsl(19, 72%, 64%);
+}
+
+.danger {
+  background-color: hsl(0, 100%, 47%);
+  color: hsl(0,0%,100%);
+  border-color: hsl(0, 100%, 47%);
+}
+
+.danger:hover {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(0, 100%, 47%);
+  border-color: hsl(0, 0, 100%);
 }
 
 /* key style rules */
