@@ -11,9 +11,7 @@ header {
   font-size: 2rem;
 }
 
-header p {
-  font-family: 'Open Sans', sans-serif;
-}
+header p { font-family: 'Open Sans', sans-serif; }
 
 /* display style rules */
 .display-container {
@@ -44,7 +42,6 @@ header p {
 }
 
 .options {
-
   margin: 10px 5px;
   cursor: pointer;
   border: .5px solid;
@@ -53,26 +50,26 @@ header p {
 }
 
 .warning {
-  color: hsl(19, 72%, 64%);
-  border-color: hsl(19, 72%, 64%);
+  color: hsla(19, 72%, 64%, .8);
+  border-color: hsla(19, 72%, 64%, .8);
 }
 
 .warning:hover {
-  background-color: hsl(19, 72%, 64%);
-  color: hsl(0, 0%, 100%);
-  border-color: hsl(19, 72%, 64%);
+  background-color: hsla(19, 72%, 64%, 1);
+  color: hsla(0, 0%, 100%, 1);
+  border-color: hsla(19, 72%, 64%, 1);
 }
 
 .danger {
-  background-color: hsl(0, 100%, 47%);
-  color: hsl(0,0%,100%);
-  border-color: hsl(0, 100%, 47%);
+  background-color: hsla(355, 100%, 39%, .8);
+  color: hsla(0,0%,100%, .8);
+  border-color: hsla(355, 100%, 39%, .8);
 }
 
 .danger:hover {
-  background-color: hsl(0, 0%, 100%);
-  color: hsl(0, 100%, 47%);
-  border-color: hsl(0, 0, 100%);
+  background-color: hsla(0, 0%, 100%, 1);
+  color: hsla(355, 100%, 39%, 1);
+  border-color: hsla(0, 0, 100%, 1);
 }
 
 /* key style rules */
@@ -86,9 +83,7 @@ header p {
   padding: 10px;
   justify-content: center;
   align-items: center;
-
 }
-
 
 button {
   width: 50px; height: 50px;
@@ -100,24 +95,15 @@ button {
   margin: 3px;
 }
 
-.numbers > button {
-  background-color: hsla(0, 0%, 95%, .85);
-}
-.operators > button {
-  background-color: hsla(351.1, 33.3%, 72.4%, .9);
-}
+.numbers > button { background-color: hsla(0, 0%, 95%, .85); }
 
-.numbers > button:hover {
-  background-color: hsla(0, 0%, 100%, 1);
-}
+.operators > button { background-color: hsla(351.1, 33.3%, 72.4%, .9); }
 
-.operators > button:hover {
-  background-color: hsla(351, 33.6%, 57.5%, 1);
-}
+.numbers > button:hover { background-color: hsla(0, 0%, 100%, 1); }
 
-.pressed {
-  color: hsl(351, 33.6%, 57.5%);
-}
+.operators > button:hover { background-color: hsla(351, 33.6%, 57.5%, 1); }
+
+.pressed { color: hsl(351, 33.6%, 57.5%); }
 
 #submit {
   background-color: hsl(351, 33.6%, 57.5%, .85);
@@ -127,3 +113,4 @@ button {
 #submit:hover {
   background-color: hsl(0, 0%, 100%);
   color: hsl(351, 33.6%, 57.5%);
+}
