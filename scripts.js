@@ -49,14 +49,8 @@ function keysClicked(event) {
   if (eventTarget.nodeName.toLowerCase() === 'div') {
     let divOption = eventTarget.getAttribute('data-action');
 
-    if (divOption == 'delete') {
-      let currentContents = displayDiv.textContent;
-      displayDiv.textContent = '';
-      toCalculate.pop();
+    if (divOption == 'delete') deleteLastEntry();
 
-      sendToDisplay( currentContents.slice(0, currentContents.length-1) );
-
-    }
     else if (divOption == 'clear') {
       toCalculate = [];
       sendToDisplay(displayDiv.textContent = '')
@@ -81,7 +75,7 @@ resetButton.addEventListener('click', () => {
   sendToDisplay(displayResult.textContent = '');
   window.addEventListener('click', keysClicked);
   window.addEventListener('keydown', keysPressed);
-  for (option of screenOptions) option.style.display = 'none';
+  hideScreenOptions();
   resetButton.style.display = 'none';
   });
 
@@ -135,10 +129,10 @@ window.addEventListener('keydown', keysPressed);
 
 function keysPressed (event) {
   let keyPressed = event.keyCode;
-  if (  (keyPressed > 46 && keyPressed < 58) ||
-        (keyPressed >95 && keyPressed < 106) ||
-        (keyPressed == 106 || keyPressed == 107 || keyPressed == 109 || keyPressed == 111) ||
-        (keyPressed == 191 || keyPressed == 189) ){
+  if ((keyPressed > 46 && keyPressed < 58) ||
+      (keyPressed > 95 && keyPressed < 106) ||
+      (keyPressed == 106 || keyPressed == 107 || keyPressed == 109 || keyPressed == 111) ||
+      (keyPressed == 191 || keyPressed == 189) ){
     let keyValue = event.key;
     if( keyPressed == 106) keyValue = 'x';
     sendToDisplay(keyValue);
@@ -152,6 +146,8 @@ function keysPressed (event) {
     displayResults();
     displayResetOption();
   }
+
+  if (keyPressed == 8) deleteLastEntry();
 }
 
 function displayResults() {
@@ -174,4 +170,12 @@ function disableButtons () {
   for (button of allButtons) {
     button.disabled = true;
   }
+}
+
+function deleteLastEntry() {
+  let currentContents = displayDiv.textContent;
+  displayDiv.textContent = '';
+  toCalculate.pop();
+
+  sendToDisplay( currentContents.slice(0, currentContents.length-1) );
 }
