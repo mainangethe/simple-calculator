@@ -49,19 +49,9 @@ function keysClicked(event) {
   if (eventTarget.nodeName.toLowerCase() === 'div') {
     let divOption = eventTarget.getAttribute('data-action');
 
-    if (divOption == 'delete') {
-      let currentContents = displayDiv.textContent;
-      displayDiv.textContent = '';
-      toCalculate.pop();
+    if (divOption == 'delete') deleteLastEntry();
 
-      sendToDisplay( currentContents.slice(0, currentContents.length-1) );
-
-    }
-    else if (divOption == 'clear') {
-      toCalculate = [];
-      sendToDisplay(displayDiv.textContent = '')
-      for (option of screenOptions) option.style.display = 'none';
-    }
+    else if (divOption == 'clear') deleteAllEntries();
 
   }
 }
@@ -74,16 +64,7 @@ equalsButton.addEventListener('click', event => {
   displayResetOption();
 });
 
-resetButton.addEventListener('click', () => {
-  for (button of allButtons) button.disabled = false;
-  toCalculate = [];
-  sendToDisplay(displayDiv.textContent = '');
-  sendToDisplay(displayResult.textContent = '');
-  window.addEventListener('click', keysClicked);
-  window.addEventListener('keydown', keysPressed);
-  for (option of screenOptions) option.style.display = 'none';
-  resetButton.style.display = 'none';
-  });
+resetButton.addEventListener('click', resetCalculator);
 
 function operate (array) {
   if (array) {
@@ -135,10 +116,10 @@ window.addEventListener('keydown', keysPressed);
 
 function keysPressed (event) {
   let keyPressed = event.keyCode;
-  if (  (keyPressed > 46 && keyPressed < 58) ||
-        (keyPressed >95 && keyPressed < 106) ||
-        (keyPressed == 106 || keyPressed == 107 || keyPressed == 109 || keyPressed == 111) ||
-        (keyPressed == 191 || keyPressed == 189) ){
+  if ((keyPressed > 46 && keyPressed < 58) ||
+      (keyPressed > 95 && keyPressed < 106) ||
+      (keyPressed == 106 || keyPressed == 107 || keyPressed == 109 || keyPressed == 111) ||
+      (keyPressed == 191 || keyPressed == 189) ){
     let keyValue = event.key;
     if( keyPressed == 106) keyValue = 'x';
     sendToDisplay(keyValue);
@@ -152,6 +133,10 @@ function keysPressed (event) {
     displayResults();
     displayResetOption();
   }
+
+  if (keyPressed == 8) deleteLastEntry();
+
+  if (keyPressed == 27) deleteAllEntries();
 }
 
 function displayResults() {
@@ -174,4 +159,29 @@ function disableButtons () {
   for (button of allButtons) {
     button.disabled = true;
   }
+}
+
+function deleteLastEntry() {
+  let currentContents = displayDiv.textContent;
+  displayDiv.textContent = '';
+  toCalculate.pop();
+
+  sendToDisplay( currentContents.slice(0, currentContents.length-1) );
+}
+
+function deleteAllEntries() {
+  toCalculate = [];
+  sendToDisplay(displayDiv.textContent = '')
+  hideScreenOptions();
+}
+
+function resetCalculator() {
+  for (button of allButtons) button.disabled = false;
+  toCalculate = [];
+  sendToDisplay(displayDiv.textContent = '');
+  sendToDisplay(displayResult.textContent = '');
+  window.addEventListener('click', keysClicked);
+  window.addEventListener('keydown', keysPressed);
+  hideScreenOptions();
+  resetButton.style.display = 'none';
 }
