@@ -51,11 +51,7 @@ function keysClicked(event) {
 
     if (divOption == 'delete') deleteLastEntry();
 
-    else if (divOption == 'clear') {
-      toCalculate = [];
-      sendToDisplay(displayDiv.textContent = '')
-      for (option of screenOptions) option.style.display = 'none';
-    }
+    else if (divOption == 'clear') deleteAllEntries();
 
   }
 }
@@ -68,16 +64,7 @@ equalsButton.addEventListener('click', event => {
   displayResetOption();
 });
 
-resetButton.addEventListener('click', () => {
-  for (button of allButtons) button.disabled = false;
-  toCalculate = [];
-  sendToDisplay(displayDiv.textContent = '');
-  sendToDisplay(displayResult.textContent = '');
-  window.addEventListener('click', keysClicked);
-  window.addEventListener('keydown', keysPressed);
-  hideScreenOptions();
-  resetButton.style.display = 'none';
-  });
+resetButton.addEventListener('click', resetCalculator);
 
 function operate (array) {
   if (array) {
@@ -148,6 +135,8 @@ function keysPressed (event) {
   }
 
   if (keyPressed == 8) deleteLastEntry();
+
+  if (keyPressed == 27) deleteAllEntries();
 }
 
 function displayResults() {
@@ -178,4 +167,21 @@ function deleteLastEntry() {
   toCalculate.pop();
 
   sendToDisplay( currentContents.slice(0, currentContents.length-1) );
+}
+
+function deleteAllEntries() {
+  toCalculate = [];
+  sendToDisplay(displayDiv.textContent = '')
+  hideScreenOptions();
+}
+
+function resetCalculator() {
+  for (button of allButtons) button.disabled = false;
+  toCalculate = [];
+  sendToDisplay(displayDiv.textContent = '');
+  sendToDisplay(displayResult.textContent = '');
+  window.addEventListener('click', keysClicked);
+  window.addEventListener('keydown', keysPressed);
+  hideScreenOptions();
+  resetButton.style.display = 'none';
 }
